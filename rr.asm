@@ -1658,8 +1658,12 @@ LA80A:      sty CHKSNT
             ldy #$00
             lda #$08
             sta CONSOL
+			lda TRIG0
+			beq LTRG
             lda CONSOL
-            lsr
+			bne LNTRG
+LTRG:		lda #6
+LNTRG:      lsr
             bcs LA82C
             lda #$02
             sta L00C6
@@ -3858,7 +3862,7 @@ LB91C:      eor ($00,X)
             .byte $D7
             sta FMSZPG+5
             bcs LB8DD
-            bcs LB8AF
+            jcs LB8AF
             .byte $80
             bcs LB8E2
             rol
@@ -4331,7 +4335,7 @@ LBC5A:      asl WARMST
             ldx #$A5
             .byte $42
             ldx #$95
-            bvc LBC10
+            jvc LBC10
             sta TEMP,X
             asl
             eor TEMP,X
