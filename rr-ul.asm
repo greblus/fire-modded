@@ -1256,7 +1256,7 @@ LA4E1:      cpx #$30
             ldy #$80
             sty L052C
 			nop:nop
-			jsr RETRIG
+			nop:nop:nop
 LA4F1:      dec DELTAR
             bne LA552
 LA4F5:      inx
