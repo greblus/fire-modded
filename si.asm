@@ -354,6 +354,7 @@ MINTLK      = $03F9
 GINTLK      = $03FA
 CHLINK      = $03FB
 CASBUF      = $03FD
+TRIGD       = $03FC
 ; 
 ; HARDWARE REGISTERS
 ; 
@@ -854,10 +855,10 @@ L5206:      lda #$40
             sta IRQEN
             lda SSFLAG
             bne L5206
-            lda CONSOL
+            jsr TRGST
             lsr
             bcs L5226
-L5216:      lda CONSOL
+L5216:      jsr TRGST//lda CONSOL
             lsr
             bcc L5216
             jsr L1016
@@ -1317,7 +1318,7 @@ L55C1:      .byte $9D,$10,$00      ; sta POKMSK,X
             bne L55C1
             rts
 L55E0:      lda L0085
-            bne L55E0
+            bne L55E0 
             lda #$FF
             sta L0085
             rts
@@ -1347,7 +1348,7 @@ L55E0:      lda L0085
             cpx #$0A
             bcc L5625
 L5623:      lda #$03
-L5625:      sta L00D2
+L5625:      sta L00D2 //życia
             ldy #$00
             lda #$0E
             sta L00E0
@@ -2771,6 +2772,27 @@ L615B:      .byte $00,$00
             rts
             .byte $00,$00,$00,$00,$00,$00
 ;
+
+			      org $4016
+TRGST:		  lda TRIGD
+            bne LTRGB
+
+LTRGA:      lda TRIG0
+            bne LTRGB
+            lda #$01
+            sta TRIGD
+            lda #$06
+            rts
+
+LTRGB:      lda CONSOL
+            rts
+
+RETRIG:     dec L00D2
+            bne R
+            lda #0
+            sta TRIGD
+R           rts
+
             org  $02E0
 ;
             .word L513D
