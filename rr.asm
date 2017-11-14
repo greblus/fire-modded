@@ -354,7 +354,7 @@ MINTLK      = $03F9
 GINTLK      = $03FA
 CHLINK      = $03FB
 CASBUF      = $03FD
-TRIGD		= $0453
+TRIGD       = $0453
 ; 
 ; HARDWARE REGISTERS
 ; 
@@ -795,7 +795,7 @@ LFFFF       = $FFFF
             org  $0400
 ;
 L0400:      lda #$00
-			sta TRIGD
+            sta TRIGD
             tax
             tay
             sta DSKFMS
@@ -1255,8 +1255,8 @@ LA4E1:      cpx #$30
             bne LA4F1
             ldy #$80
             sty L052C
-			nop:nop
-			jsr RETRIG
+            nop:nop
+            jsr RETRIG
 LA4F1:      dec DELTAR
             bne LA552
 LA4F5:      inx
@@ -1658,7 +1658,7 @@ LA808:      stx TEMP
 LA80A:      sty CHKSNT
             ldy #$00
             jsr TRGST //lda #$08
-				nop:nop:nop:nop:nop
+                nop:nop:nop:nop:nop
             //sta CONSOL
             //lda CONSOL
             lsr
@@ -4876,28 +4876,28 @@ LBFE4:      ror NOCKSM
             ldy #$00
             .byte $80,$00,$A0
 ;
-			org $4016
-TRGST:		lda TRIGD
-			bne LTRGB
-
-LTRGA:		lda TRIG0
-			bne LTRGB
+            org $4016
+TRGST:      lda TRIGD
+            bne @+
+            
+            lda TRIG0
+            bne @+
             lda #$01
-			sta TRIGD
-			lda #$06
-			rts
+            sta TRIGD
+            lda #$06
+            rts
 
-LTRGB:		lda CONSOL
-			rts
+@:          lda CONSOL
+            rts
 
-RETRIG:		ldy RAMTOP
-			dey
-			sty RAMTOP
-			beq @+
-			rts
-@			lda #0
-			sta TRIGD
-			rts
+RETRIG:     ldy RAMTOP
+            dey
+            sty RAMTOP
+            beq @+
+            rts
+@           lda #0
+            sta TRIGD
+            rts
 
             org  $00CA
 ;
