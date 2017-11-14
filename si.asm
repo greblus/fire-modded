@@ -1149,8 +1149,8 @@ L546F:      jsr L141B
             jmp L0EC8
 L5483:      dec L00D2
             bne L5492
-            lda #$40
-            sta L00B8
+			nop
+            jsr RETRIG 
             lda #$00
             sta L00C3
             jsr L1517
@@ -2773,8 +2773,8 @@ L615B:      .byte $00,$00
             .byte $00,$00,$00,$00,$00,$00
 ;
 
-			      org $4016
-TRGST:		  lda TRIGD
+			org $4016
+TRGST:		lda TRIGD
             bne LTRGB
 
 LTRGA:      lda TRIG0
@@ -2787,11 +2787,11 @@ LTRGA:      lda TRIG0
 LTRGB:      lda CONSOL
             rts
 
-RETRIG:     dec L00D2
-            bne R
-            lda #0
+RETRIG:     lda #0
             sta TRIGD
-R           rts
+			lda #$40
+            sta L00B8
+            rts
 
             org  $02E0
 ;
