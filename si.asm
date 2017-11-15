@@ -2772,7 +2772,7 @@ L615B:      .byte $00,$00
             rts
             .byte $00,$00,$00,$00,$00,$00
 ;
-            org $4016
+            org $6190
 TRGST:      lda TRIGD
             bne @+
 
