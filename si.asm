@@ -759,8 +759,8 @@ LFFFF       = $FFFF
 ;
             org  $513D
 ;
-L513D:      lda L518B
-            sta L00CD
+L513D:      jsr ZTRIGD
+            nop:nop
             lda L518C
             sta L00CE
             lda #$89
@@ -2790,6 +2790,12 @@ RETRIG:     lda #0
             sta TRIGD
             lda #$40
             sta L00B8
+            rts
+
+ZTRIGD:     lda L518B
+            sta L00CD
+            lda #$00
+            sta TRIGD
             rts
 
             org  $02E0
