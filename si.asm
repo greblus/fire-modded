@@ -2784,11 +2784,11 @@ TRGST:      lda TRIGD
             rts
 
 @:          lda $B5
-			cmp #$B4
-			bne @+
-			lda #0
-			sta TRIGD
-@:			lda CONSOL
+            cmp #$B4
+            bne @+
+            lda #0
+            sta TRIGD
+@:          lda CONSOL
             rts
 
 RETRIG:     lda #0

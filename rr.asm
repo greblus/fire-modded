@@ -1755,7 +1755,7 @@ LA8C4:      ldx #$00
             lda ICSTAZ
             and #$04
             //ora #$10
-			nop:nop
+            nop:nop
             sta ICSTAZ
             ldx OLDADR+1
             stx ICAX3Z
@@ -4885,16 +4885,16 @@ TRGST:      lda TRIGD
             lda TRIG0
             beq L3
 
-L1:       	lda DELTAR
-			cmp #$FF
-			bne L2
-			lda #0
-			sta TRIGD
-L2:			lda CONSOL
+L1:         lda DELTAR
+            cmp #$FF
+            bne L2
+            lda #0
+            sta TRIGD
+L2:         lda CONSOL
             rts
                 
-L3:  		lda #1
-			sta TRIGD
+L3:         lda #1
+            sta TRIGD
             lda #$06
             rts
 
