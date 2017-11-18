@@ -12255,6 +12255,8 @@ TRGST:      lda TRIGD
 L1:         lda $6A65
             cmp #$A9        //crash, rank screen
             beq L2
+            cmp #$B7        //different rank 
+            beq L2
             cmp #$50        //crash, later, title screen
             bne L3
 L2:         lda #0
