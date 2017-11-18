@@ -354,7 +354,6 @@ MINTLK      = $03F9
 GINTLK      = $03FA
 CHLINK      = $03FB
 CASBUF      = $03FD
-TRIGD       = $0451
 ; 
 ; HARDWARE REGISTERS
 ; 
@@ -794,7 +793,7 @@ LFFFF       = $FFFF
 ;
             org  $0400
 ;
-L0400:      jsr INIT 
+L0400:      lda #0
             tax
             tay
             sta DSKFMS
@@ -4898,9 +4897,7 @@ L3:         lda #1
             lda #$06
             rts
 
-INIT:       lda #0
-            sta TRIGD
-            rts
+TRIGD:      .byte $00
 
             org  $00CA
 ;

@@ -354,7 +354,6 @@ MINTLK      = $03F9
 GINTLK      = $03FA
 CHLINK      = $03FB
 CASBUF      = $03FD
-TRIGD       = $03FC
 ; 
 ; HARDWARE REGISTERS
 ; 
@@ -759,8 +758,8 @@ LFFFF       = $FFFF
 ;
             org  $513D
 ;
-L513D:      jsr ZTRIGD
-            nop:nop
+L513D:      lda L518B
+            sta L00CD
             lda L518C
             sta L00CE
             lda #$89
@@ -2773,6 +2772,7 @@ L615B:      .byte $00,$00
             .byte $00,$00,$00,$00,$00,$00
 ;
             org $6190
+
 TRGST:      lda TRIGD
             bne @+
 
@@ -2797,11 +2797,7 @@ RETRIG:     lda #0
             sta L00B8
             rts
 
-ZTRIGD:     lda L518B
-            sta L00CD
-            lda #$00
-            sta TRIGD
-            rts
+TRIGD:      .byte $00
 
             org  $02E0
 ;

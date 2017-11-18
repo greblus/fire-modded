@@ -354,7 +354,6 @@ MINTLK      = $03F9
 GINTLK      = $03FA
 CHLINK      = $03FB
 CASBUF      = $03FD
-TRIGD       = $04B1
 ; 
 ; HARDWARE REGISTERS
 ; 
@@ -12253,15 +12252,17 @@ TRGST:      lda TRIGD
             beq L5
 
 L1:         lda $6A65
-            cmp #$A9        //crash, rank screen
+            cmp #$90        //moving along the runway
             beq L2
-            cmp #$B7        //different rank 
+            cmp #$51        //flying
             beq L2
-            cmp #$50        //crash, later, title screen
+            cmp #$52        //flying 
             bne L3
-L2:         lda #0
+            lda $06f3       
+            bne L3          //demo mode
+L2:         lda #1
             jmp L4
-L3:         lda #1 
+L3:         lda #0 
 L4:         sta TRIGD
             lda CONSOL
             cmp #$06
@@ -12273,7 +12274,5 @@ L5:         lda #1
             cmp #$06
             rts
 
-INIT:       lda #0
-            sta TRIGD
-            rts
+TRIGD:      .byte $00
          

@@ -354,7 +354,6 @@ MINTLK      = $03F9
 GINTLK      = $03FA
 CHLINK      = $03FB
 CASBUF      = $03FD
-TRIGD       = $4031
 ; 
 ; HARDWARE REGISTERS
 ; 
@@ -888,7 +887,8 @@ L60F1:      lda $00
             lda #$00
             sta L6FFF
             jmp (VVBLKD)
-L6109:      jsr ZTRIGD
+L6109:      cld
+            lda #0
             sei
             tax
             dex
@@ -7503,6 +7503,7 @@ L9FF7:      rti
             .byte $52,$00,$70
 ;
             org $4000
+
 TRGST:      lda TRIGD
             bne @+
             
@@ -7523,10 +7524,7 @@ RETRIG:     lda #0
             jsr L894E
             rts
 
-ZTRIGD:     cld
-            lda #$00
-            sta TRIGD
-            rts
+TRIGD:      .byte $00
 
             org  $00CA
             org  $02E2
